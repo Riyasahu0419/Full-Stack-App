@@ -2,9 +2,9 @@ import { useState } from "react";
 
 function ProductForm() {
   // State for form fields
-  const [name, setName] = useState('');
+  const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
+  // const [category, setCategory] = useState('');
   const [price, setPrice] = useState('');
 
   // State for dynamic categories
@@ -12,10 +12,10 @@ function ProductForm() {
 
   const handleSubmit = () => {
     const payload={
-        name,description,category,price
+       title,description,price
     }
    
-    fetch("http://localhost:8080/notes", {
+    fetch("http://localhost:8000/products", {
         method: "POST",
         headers: {
             "Content-type": "application/json",
@@ -35,12 +35,12 @@ function ProductForm() {
       <h1>Welcome, please add a new product</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Name:</label>
+          <label>Title:</label>
           <input
             type="text"
-            placeholder="Name"
+            placeholder="Title"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
 
@@ -54,7 +54,7 @@ function ProductForm() {
           />
         </div>
 
-        <div>
+        {/* <div>
           <label>Category:</label>
           <select
             value={category}
@@ -67,7 +67,7 @@ function ProductForm() {
             <option value="Home Appliances">Home Appliances</option>
             <option value="Toys">Toys</option>
           </select>
-        </div>
+        </div> */}
 
         
         <div>
