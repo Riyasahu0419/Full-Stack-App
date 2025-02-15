@@ -15,7 +15,7 @@ function ProductForm() {
        title,description,price
     }
    
-    fetch("http://localhost:8000/products", {
+    fetch("https://full-stack-backend-part.onrender.com/Products", {
         method: "POST",
         headers: {
             "Content-type": "application/json",
