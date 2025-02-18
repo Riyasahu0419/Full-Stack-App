@@ -185,26 +185,32 @@ const Signup = () =>{
     const [email, setEmail] = useState("")
     const [pass, setPass] = useState("")
 
-    const handleRegister = () => {
-        const payload = {
-            name, 
-            email,
-            pass
+    const handleRegister = async () => {
+        const payload = { name, email, pass };
+    
+        try {
+            const response = await fetch("https://full-stack-backend-part.onrender.com/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                credentials: "include", // Allow cookies/session-based authentication
+                body: JSON.stringify(payload),
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+    
+            const data = await response.json();
+            alert(data.msg);
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Registration failed. Please try again.");
         }
-
-        fetch("https://full-stack-backend-part.onrender.com/users", {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json"
-            },
-            credentials: "include",
-            body: JSON.stringify(payload),
-        }).then((res)=>res.json())
-        .then((data)=>{
-            alert(data.msg)
-        })
-        .catch((error)=>console.log(error))
-    }
+    };
+    
     return (
         <>
             <h2>Please regiter yourself!</h2>
